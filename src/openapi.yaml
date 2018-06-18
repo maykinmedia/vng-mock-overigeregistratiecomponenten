@@ -1,0 +1,126 @@
+openapi: 3.0.0
+info:
+  title: Mock-Overige-data registratiecomponent (ORC) API documentatie
+  description: Deze API is GEEN referentie-implementatie van overige services
+  contact:
+    email: support@maykinmedia.nl
+  license:
+    name: EUPL 1.2
+  version: '1'
+security:
+  - basic: []
+paths:
+  /domeindata:
+    get:
+      operationId: domeindata_list
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DomeinData'
+      tags:
+        - domeindata
+    post:
+      operationId: domeindata_create
+      description: ''
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DomeinData'
+      tags:
+        - domeindata
+      requestBody:
+        $ref: '#/components/requestBodies/DomeinData'
+    parameters: []
+  '/domeindata/{id}':
+    get:
+      operationId: domeindata_read
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DomeinData'
+      tags:
+        - domeindata
+    put:
+      operationId: domeindata_update
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DomeinData'
+      tags:
+        - domeindata
+      requestBody:
+        $ref: '#/components/requestBodies/DomeinData'
+    patch:
+      operationId: domeindata_partial_update
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DomeinData'
+      tags:
+        - domeindata
+      requestBody:
+        $ref: '#/components/requestBodies/DomeinData'
+    delete:
+      operationId: domeindata_delete
+      description: ''
+      responses:
+        '204':
+          description: ''
+      tags:
+        - domeindata
+    parameters:
+      - name: id
+        in: path
+        description: A unique integer value identifying this domeindata.
+        required: true
+        schema:
+          type: integer
+servers:
+  - url: /api/v1
+components:
+  requestBodies:
+    DomeinData:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DomeinData'
+      required: true
+  securitySchemes:
+    basic:
+      type: http
+      scheme: basic
+  schemas:
+    DomeinData:
+      required:
+        - data
+      type: object
+      properties:
+        url:
+          title: Url
+          type: string
+          format: uri
+          readOnly: true
+        data:
+          title: Data
+          type: string
