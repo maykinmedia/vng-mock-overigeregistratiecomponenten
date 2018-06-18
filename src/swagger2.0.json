@@ -165,6 +165,143 @@
                     "type": "integer"
                 }
             ]
+        },
+        "/rsgb/verblijfsobjecten": {
+            "get": {
+                "operationId": "verblijfsobject_list",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/VerblijfsObject"
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "rsgb"
+                ]
+            },
+            "post": {
+                "operationId": "verblijfsobject_create",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/VerblijfsObject"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/VerblijfsObject"
+                        }
+                    }
+                },
+                "tags": [
+                    "rsgb"
+                ]
+            },
+            "parameters": []
+        },
+        "/rsgb/verblijfsobjecten/{id}": {
+            "get": {
+                "operationId": "verblijfsobject_read",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/VerblijfsObject"
+                        }
+                    }
+                },
+                "tags": [
+                    "rsgb"
+                ]
+            },
+            "put": {
+                "operationId": "verblijfsobject_update",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/VerblijfsObject"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/VerblijfsObject"
+                        }
+                    }
+                },
+                "tags": [
+                    "rsgb"
+                ]
+            },
+            "patch": {
+                "operationId": "verblijfsobject_partial_update",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/VerblijfsObject"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/VerblijfsObject"
+                        }
+                    }
+                },
+                "tags": [
+                    "rsgb"
+                ]
+            },
+            "delete": {
+                "operationId": "verblijfsobject_delete",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "204": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "rsgb"
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "description": "A unique integer value identifying this Verblijfsobject.",
+                    "required": true,
+                    "type": "integer"
+                }
+            ]
         }
     },
     "definitions": {
@@ -183,6 +320,82 @@
                 "data": {
                     "title": "Data",
                     "type": "string"
+                }
+            }
+        },
+        "Adres": {
+            "title": "Hoofdadres",
+            "required": [
+                "straatnaam",
+                "postcode",
+                "woonplaatsnaam",
+                "huisnummer"
+            ],
+            "type": "object",
+            "properties": {
+                "id": {
+                    "title": "ID",
+                    "type": "integer",
+                    "readOnly": true
+                },
+                "straatnaam": {
+                    "title": "Straatnaam",
+                    "description": "De offici\u00eble straatnaam zoals door het bevoegd gemeentelijk orgaan is vastgesteld, zo nodig ingekort conform de specificaties van de NEN 5825.",
+                    "type": "string",
+                    "maxLength": 50,
+                    "minLength": 1
+                },
+                "postcode": {
+                    "title": "Postcode",
+                    "type": "string",
+                    "maxLength": 7,
+                    "minLength": 1
+                },
+                "woonplaatsnaam": {
+                    "title": "Woonplaatsnaam",
+                    "type": "string",
+                    "maxLength": 80,
+                    "minLength": 1
+                },
+                "huisnummer": {
+                    "title": "Huisnummer",
+                    "type": "string",
+                    "maxLength": 5,
+                    "minLength": 1
+                },
+                "huisletter": {
+                    "title": "Huisletter",
+                    "type": "string",
+                    "maxLength": 1
+                },
+                "huisnummertoevoeging": {
+                    "title": "Huisnummertoevoeging",
+                    "type": "string",
+                    "maxLength": 4
+                }
+            }
+        },
+        "VerblijfsObject": {
+            "required": [
+                "identificatie",
+                "hoofdadres"
+            ],
+            "type": "object",
+            "properties": {
+                "url": {
+                    "title": "Url",
+                    "type": "string",
+                    "format": "uri",
+                    "readOnly": true
+                },
+                "identificatie": {
+                    "title": "Identificatie",
+                    "type": "string",
+                    "maxLength": 50,
+                    "minLength": 1
+                },
+                "hoofdadres": {
+                    "$ref": "#/definitions/Adres"
                 }
             }
         }

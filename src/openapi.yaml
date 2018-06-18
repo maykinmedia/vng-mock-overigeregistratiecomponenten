@@ -96,10 +96,102 @@ paths:
         required: true
         schema:
           type: integer
+  /rsgb/verblijfsobjecten:
+    get:
+      operationId: verblijfsobject_list
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/VerblijfsObject'
+      tags:
+        - rsgb
+    post:
+      operationId: verblijfsobject_create
+      description: ''
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VerblijfsObject'
+      tags:
+        - rsgb
+      requestBody:
+        $ref: '#/components/requestBodies/VerblijfsObject'
+    parameters: []
+  '/rsgb/verblijfsobjecten/{id}':
+    get:
+      operationId: verblijfsobject_read
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VerblijfsObject'
+      tags:
+        - rsgb
+    put:
+      operationId: verblijfsobject_update
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VerblijfsObject'
+      tags:
+        - rsgb
+      requestBody:
+        $ref: '#/components/requestBodies/VerblijfsObject'
+    patch:
+      operationId: verblijfsobject_partial_update
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VerblijfsObject'
+      tags:
+        - rsgb
+      requestBody:
+        $ref: '#/components/requestBodies/VerblijfsObject'
+    delete:
+      operationId: verblijfsobject_delete
+      description: ''
+      responses:
+        '204':
+          description: ''
+      tags:
+        - rsgb
+    parameters:
+      - name: id
+        in: path
+        description: A unique integer value identifying this Verblijfsobject.
+        required: true
+        schema:
+          type: integer
 servers:
   - url: /api/v1
 components:
   requestBodies:
+    VerblijfsObject:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/VerblijfsObject'
+      required: true
     DomeinData:
       content:
         application/json:
@@ -124,3 +216,66 @@ components:
         data:
           title: Data
           type: string
+    Adres:
+      title: Hoofdadres
+      required:
+        - straatnaam
+        - postcode
+        - woonplaatsnaam
+        - huisnummer
+      type: object
+      properties:
+        id:
+          title: ID
+          type: integer
+          readOnly: true
+        straatnaam:
+          title: Straatnaam
+          description: >-
+            De officiële straatnaam zoals door het bevoegd gemeentelijk orgaan
+            is vastgesteld, zo nodig ingekort conform de specificaties van de
+            NEN 5825.
+          type: string
+          maxLength: 50
+          minLength: 1
+        postcode:
+          title: Postcode
+          type: string
+          maxLength: 7
+          minLength: 1
+        woonplaatsnaam:
+          title: Woonplaatsnaam
+          type: string
+          maxLength: 80
+          minLength: 1
+        huisnummer:
+          title: Huisnummer
+          type: string
+          maxLength: 5
+          minLength: 1
+        huisletter:
+          title: Huisletter
+          type: string
+          maxLength: 1
+        huisnummertoevoeging:
+          title: Huisnummertoevoeging
+          type: string
+          maxLength: 4
+    VerblijfsObject:
+      required:
+        - identificatie
+        - hoofdadres
+      type: object
+      properties:
+        url:
+          title: Url
+          type: string
+          format: uri
+          readOnly: true
+        identificatie:
+          title: Identificatie
+          type: string
+          maxLength: 50
+          minLength: 1
+        hoofdadres:
+          $ref: '#/components/schemas/Adres'
