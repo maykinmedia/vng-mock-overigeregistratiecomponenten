@@ -1,12 +1,11 @@
-# Stage 1.1 - Compile needed python dependencies
-FROM alpine:3.7 AS build
+# Stage 1 - Compile needed python dependencies
+FROM python:3.6-alpine AS build
 RUN apk --no-cache add \
     gcc \
     musl-dev \
     pcre-dev \
     linux-headers \
     postgresql-dev \
-    python3 \
     python3-dev \
     # libraries installed using git
     git \
@@ -17,36 +16,57 @@ RUN apk --no-cache add \
     openjpeg-dev \
     zlib-dev
 
-RUN pip3 install virtualenv
-RUN virtualenv /app/env
-
 WORKDIR /app
 
 COPY ./requirements /app/requirements
-RUN /app/env/bin/pip install -r requirements/dev.txt
-RUN /app/env/bin/pip install uwsgi
+RUN pip install -r requirements/production.txt
+# Don't copy source code here, as changes will bust the cache for everyting
+# below
 
-# Stage 1.2 - Compile needed frontend dependencies
-RUN apk --no-cache add \
-    # node.js
-    nodejs \
-    nodejs-npm \
-    python
 
-COPY ./src /app/src
-COPY ./*.json /app/
+# # Stage 2 - build frontend
+# FROM mhart/alpine-node AS frontend-build
 
-RUN npm install
+# WORKDIR /app
 
-# Stage 2 - Build docker image suitable for execution and deployment
-FROM alpine:3.7
+# COPY ./*.json /app/
+# RUN npm install
+
+# COPY ./Gulpfile.js /app/
+# COPY ./build /app/build/
+
+# COPY src/orc/sass/ /app/src/orc/sass/
+# RUN npm run build
+
+
+# Stage 3 - Prepare jenkins tests image
+# FROM build AS jenkins
+
+# COPY --from=build /usr/local/lib/python3.6 /usr/local/lib/python3.6
+# COPY --from=build /app/requirements /app/requirements
+
+# RUN pip install -r requirements/jenkins.txt --exists-action=s
+
+# # Stage 3.2 - Set up testing config
+# COPY ./setup.cfg /app/setup.cfg
+# COPY ./bin/runtests.sh /runtests.sh
+
+# # Stage 3.3 - Copy source code
+# COPY --from=frontend-build /app/src/orc/static/fonts /app/src/orc/static/fonts
+# COPY --from=frontend-build /app/src/orc/static/css /app/src/orc/static/css
+# COPY ./src /app/src
+# RUN mkdir /app/log && rm /app/src/orc/conf/test.py
+# CMD ["/runtests.sh"]
+
+
+# Stage 4 - Build docker image suitable for execution and deployment
+FROM python:3.6-alpine AS production
 RUN apk --no-cache add \
     ca-certificates \
     mailcap \
     musl \
     pcre \
     postgresql \
-    python3 \
     # lxml dependencies
     libxslt \
     # pillow dependencies
@@ -54,13 +74,18 @@ RUN apk --no-cache add \
     openjpeg \
     zlib
 
+COPY --from=build /usr/local/lib/python3.6 /usr/local/lib/python3.6
 COPY --from=build /app/src /app/src
+COPY --from=build /usr/local/bin/uwsgi /usr/local/bin/uwsgi
+
+# Stage 4.2 - Copy source code
+WORKDIR /app
 COPY ./bin/docker_start.sh /start.sh
 RUN mkdir /app/log
 
-COPY --from=build /app/env /app/env
+# COPY --from=frontend-build /app/src/orc/static/fonts /app/src/orc/static/fonts
+# COPY --from=frontend-build /app/src/orc/static/css /app/src/orc/static/css
+COPY ./src /app/src
 
-ENV PATH="/app/env/bin:${PATH}"
-WORKDIR /app
 EXPOSE 8000
 CMD ["/start.sh"]

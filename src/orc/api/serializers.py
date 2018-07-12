@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from orc.datamodel.models import DomeinData, VerblijfsObject, Adres
+from orc.datamodel.models import Adres, DomeinData, VerblijfsObject
 
 
 class DomeinDataSerializer(serializers.HyperlinkedModelSerializer):
