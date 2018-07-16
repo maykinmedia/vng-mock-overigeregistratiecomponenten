@@ -11,7 +11,7 @@
         },
         "version": "1"
     },
-    "basePath": "/api/v1",
+    "basePath": "/api/v1/rsgb",
     "consumes": [
         "application/json"
     ],
@@ -29,144 +29,7 @@
         }
     ],
     "paths": {
-        "/domeindata": {
-            "get": {
-                "operationId": "domeindata_list",
-                "description": "",
-                "parameters": [],
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/DomeinData"
-                            }
-                        }
-                    }
-                },
-                "tags": [
-                    "domeindata"
-                ]
-            },
-            "post": {
-                "operationId": "domeindata_create",
-                "description": "",
-                "parameters": [
-                    {
-                        "name": "data",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/DomeinData"
-                        }
-                    }
-                ],
-                "responses": {
-                    "201": {
-                        "description": "",
-                        "schema": {
-                            "$ref": "#/definitions/DomeinData"
-                        }
-                    }
-                },
-                "tags": [
-                    "domeindata"
-                ]
-            },
-            "parameters": []
-        },
-        "/domeindata/{id}": {
-            "get": {
-                "operationId": "domeindata_read",
-                "description": "",
-                "parameters": [],
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "schema": {
-                            "$ref": "#/definitions/DomeinData"
-                        }
-                    }
-                },
-                "tags": [
-                    "domeindata"
-                ]
-            },
-            "put": {
-                "operationId": "domeindata_update",
-                "description": "",
-                "parameters": [
-                    {
-                        "name": "data",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/DomeinData"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "schema": {
-                            "$ref": "#/definitions/DomeinData"
-                        }
-                    }
-                },
-                "tags": [
-                    "domeindata"
-                ]
-            },
-            "patch": {
-                "operationId": "domeindata_partial_update",
-                "description": "",
-                "parameters": [
-                    {
-                        "name": "data",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/DomeinData"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "schema": {
-                            "$ref": "#/definitions/DomeinData"
-                        }
-                    }
-                },
-                "tags": [
-                    "domeindata"
-                ]
-            },
-            "delete": {
-                "operationId": "domeindata_delete",
-                "description": "",
-                "parameters": [],
-                "responses": {
-                    "204": {
-                        "description": ""
-                    }
-                },
-                "tags": [
-                    "domeindata"
-                ]
-            },
-            "parameters": [
-                {
-                    "name": "id",
-                    "in": "path",
-                    "description": "A unique integer value identifying this domeindata.",
-                    "required": true,
-                    "type": "integer"
-                }
-            ]
-        },
-        "/rsgb/verblijfsobjecten": {
+        "/verblijfsobjecten": {
             "get": {
                 "operationId": "verblijfsobject_list",
                 "description": "",
@@ -183,7 +46,7 @@
                     }
                 },
                 "tags": [
-                    "rsgb"
+                    "verblijfsobjecten"
                 ]
             },
             "post": {
@@ -208,12 +71,12 @@
                     }
                 },
                 "tags": [
-                    "rsgb"
+                    "verblijfsobjecten"
                 ]
             },
             "parameters": []
         },
-        "/rsgb/verblijfsobjecten/{id}": {
+        "/verblijfsobjecten/{id}": {
             "get": {
                 "operationId": "verblijfsobject_read",
                 "description": "",
@@ -227,7 +90,7 @@
                     }
                 },
                 "tags": [
-                    "rsgb"
+                    "verblijfsobjecten"
                 ]
             },
             "put": {
@@ -252,7 +115,7 @@
                     }
                 },
                 "tags": [
-                    "rsgb"
+                    "verblijfsobjecten"
                 ]
             },
             "patch": {
@@ -277,7 +140,7 @@
                     }
                 },
                 "tags": [
-                    "rsgb"
+                    "verblijfsobjecten"
                 ]
             },
             "delete": {
@@ -290,7 +153,7 @@
                     }
                 },
                 "tags": [
-                    "rsgb"
+                    "verblijfsobjecten"
                 ]
             },
             "parameters": [
@@ -305,24 +168,6 @@
         }
     },
     "definitions": {
-        "DomeinData": {
-            "required": [
-                "data"
-            ],
-            "type": "object",
-            "properties": {
-                "url": {
-                    "title": "Url",
-                    "type": "string",
-                    "format": "uri",
-                    "readOnly": true
-                },
-                "data": {
-                    "title": "Data",
-                    "type": "string"
-                }
-            }
-        },
         "Adres": {
             "title": "Hoofdadres",
             "required": [

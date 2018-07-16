@@ -1,13 +1,8 @@
 from rest_framework import viewsets
 
-from orc.datamodel.models import DomeinData, VerblijfsObject
+from orc.datamodel.models import VerblijfsObject
 
-from .serializers import DomeinDataSerializer, VerblijfsObjectSerializer
-
-
-class DomeinDataViewSet(viewsets.ModelViewSet):
-    queryset = DomeinData.objects.all()
-    serializer_class = DomeinDataSerializer
+from .serializers import VerblijfsObjectSerializer
 
 
 class VerblijfsObjectViewSet(viewsets.ModelViewSet):

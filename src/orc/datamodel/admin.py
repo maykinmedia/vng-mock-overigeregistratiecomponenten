@@ -1,11 +1,6 @@
 from django.contrib import admin
 
-from .models import Adres, DomeinData, VerblijfsObject
-
-
-@admin.register(DomeinData)
-class DomeinDataAdmin(admin.ModelAdmin):
-    list_display = ['__str__']
+from .models import Adres, VerblijfsObject
 
 
 @admin.register(Adres)

@@ -3,10 +3,9 @@ from django.conf.urls import include, url
 from rest_framework.routers import DefaultRouter
 
 from .schema import schema_view
-from .viewsets import DomeinDataViewSet, VerblijfsObjectViewSet
+from .viewsets import VerblijfsObjectViewSet
 
 router = DefaultRouter(trailing_slash=False)
-router.register('domeindata', DomeinDataViewSet)
 router.register('rsgb/verblijfsobjecten', VerblijfsObjectViewSet)
 
 # TODO: the EndpointEnumerator seems to choke on path and re_path
