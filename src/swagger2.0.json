@@ -29,6 +29,55 @@
         }
     ],
     "paths": {
+        "/brp/natuurlijkepersonen": {
+            "get": {
+                "operationId": "natuurlijkpersoon_list",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/NatuurlijkPersoon"
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "brp"
+                ]
+            },
+            "parameters": []
+        },
+        "/brp/natuurlijkepersonen/{uuid}": {
+            "get": {
+                "operationId": "natuurlijkpersoon_read",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/NatuurlijkPersoon"
+                        }
+                    }
+                },
+                "tags": [
+                    "brp"
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "uuid",
+                    "in": "path",
+                    "required": true,
+                    "type": "string",
+                    "format": "uuid"
+                }
+            ]
+        },
         "/mor": {
             "get": {
                 "operationId": "meldingopenbareruimte_list",
@@ -305,6 +354,46 @@
         }
     },
     "definitions": {
+        "NatuurlijkPersoon": {
+            "required": [
+                "bsn",
+                "naam",
+                "telefoonnummer"
+            ],
+            "type": "object",
+            "properties": {
+                "url": {
+                    "title": "Url",
+                    "type": "string",
+                    "format": "uri",
+                    "readOnly": true
+                },
+                "bsn": {
+                    "title": "Bsn",
+                    "type": "string",
+                    "maxLength": 9,
+                    "minLength": 1
+                },
+                "naam": {
+                    "title": "Naam",
+                    "type": "string",
+                    "maxLength": 200,
+                    "minLength": 1
+                },
+                "telefoonnummer": {
+                    "title": "Telefoonnummer",
+                    "type": "string",
+                    "maxLength": 15,
+                    "minLength": 1
+                },
+                "email": {
+                    "title": "Email",
+                    "type": "string",
+                    "format": "email",
+                    "maxLength": 254
+                }
+            }
+        },
         "MeldingOpenbareRuimte": {
             "required": [
                 "hoofdcategorie",

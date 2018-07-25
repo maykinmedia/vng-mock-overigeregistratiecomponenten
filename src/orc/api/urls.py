@@ -2,12 +2,15 @@ from django.conf.urls import include, url
 
 from zds_schema.routers import DefaultRouter
 
+from orc.brp.api.viewsets import NatuurlijkPersoonViewSet
 from orc.mor.api.viewsets import MeldingOpenbareRuimteViewset
 
 from .schema import schema_view
 from .viewsets import VerblijfsObjectViewSet
 
 router = DefaultRouter()
+
+router.register('brp/natuurlijkepersonen', NatuurlijkPersoonViewSet)
 
 router.register('rsgb/verblijfsobjecten', VerblijfsObjectViewSet)
 

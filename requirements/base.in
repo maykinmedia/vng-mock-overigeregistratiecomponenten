@@ -15,4 +15,4 @@ django-filter
 djangorestframework-camel-case
 djangorestframework-filters
 
--e git+https://github.com/vng-Realisatie/gemma-zaken-common.git@master#egg=zds_schema-0.0.12
+-e git+https://github.com/vng-Realisatie/gemma-zaken-common.git@master#egg=zds_schema-0.0.13

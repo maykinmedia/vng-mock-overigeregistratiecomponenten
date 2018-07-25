@@ -63,6 +63,7 @@ INSTALLED_APPS = [
     'orc.utils',
 
     # 'temp' apps
+    'orc.brp',
     'orc.mor',
 ]
 
