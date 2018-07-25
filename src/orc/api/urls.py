@@ -1,12 +1,18 @@
 from django.conf.urls import include, url
 
-from rest_framework.routers import DefaultRouter
+from zds_schema.routers import DefaultRouter
+
+from orc.mor.api.viewsets import MeldingOpenbareRuimteViewset
 
 from .schema import schema_view
 from .viewsets import VerblijfsObjectViewSet
 
-router = DefaultRouter(trailing_slash=False)
+router = DefaultRouter()
+
 router.register('rsgb/verblijfsobjecten', VerblijfsObjectViewSet)
+
+router.register('mor', MeldingOpenbareRuimteViewset)
+
 
 # TODO: the EndpointEnumerator seems to choke on path and re_path
 

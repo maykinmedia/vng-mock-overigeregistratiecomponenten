@@ -11,7 +11,7 @@
         },
         "version": "1"
     },
-    "basePath": "/api/v1/rsgb",
+    "basePath": "/api/v1",
     "consumes": [
         "application/json"
     ],
@@ -29,7 +29,144 @@
         }
     ],
     "paths": {
-        "/verblijfsobjecten": {
+        "/mor": {
+            "get": {
+                "operationId": "meldingopenbareruimte_list",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/MeldingOpenbareRuimte"
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "mor"
+                ]
+            },
+            "post": {
+                "operationId": "meldingopenbareruimte_create",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/MeldingOpenbareRuimte"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/MeldingOpenbareRuimte"
+                        }
+                    }
+                },
+                "tags": [
+                    "mor"
+                ]
+            },
+            "parameters": []
+        },
+        "/mor/{uuid}": {
+            "get": {
+                "operationId": "meldingopenbareruimte_read",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/MeldingOpenbareRuimte"
+                        }
+                    }
+                },
+                "tags": [
+                    "mor"
+                ]
+            },
+            "put": {
+                "operationId": "meldingopenbareruimte_update",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/MeldingOpenbareRuimte"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/MeldingOpenbareRuimte"
+                        }
+                    }
+                },
+                "tags": [
+                    "mor"
+                ]
+            },
+            "patch": {
+                "operationId": "meldingopenbareruimte_partial_update",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/MeldingOpenbareRuimte"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/MeldingOpenbareRuimte"
+                        }
+                    }
+                },
+                "tags": [
+                    "mor"
+                ]
+            },
+            "delete": {
+                "operationId": "meldingopenbareruimte_delete",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "204": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "mor"
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "uuid",
+                    "in": "path",
+                    "required": true,
+                    "type": "string",
+                    "format": "uuid"
+                }
+            ]
+        },
+        "/rsgb/verblijfsobjecten": {
             "get": {
                 "operationId": "verblijfsobject_list",
                 "description": "",
@@ -46,7 +183,7 @@
                     }
                 },
                 "tags": [
-                    "verblijfsobjecten"
+                    "rsgb"
                 ]
             },
             "post": {
@@ -71,12 +208,12 @@
                     }
                 },
                 "tags": [
-                    "verblijfsobjecten"
+                    "rsgb"
                 ]
             },
             "parameters": []
         },
-        "/verblijfsobjecten/{id}": {
+        "/rsgb/verblijfsobjecten/{id}": {
             "get": {
                 "operationId": "verblijfsobject_read",
                 "description": "",
@@ -90,7 +227,7 @@
                     }
                 },
                 "tags": [
-                    "verblijfsobjecten"
+                    "rsgb"
                 ]
             },
             "put": {
@@ -115,7 +252,7 @@
                     }
                 },
                 "tags": [
-                    "verblijfsobjecten"
+                    "rsgb"
                 ]
             },
             "patch": {
@@ -140,7 +277,7 @@
                     }
                 },
                 "tags": [
-                    "verblijfsobjecten"
+                    "rsgb"
                 ]
             },
             "delete": {
@@ -153,7 +290,7 @@
                     }
                 },
                 "tags": [
-                    "verblijfsobjecten"
+                    "rsgb"
                 ]
             },
             "parameters": [
@@ -168,6 +305,42 @@
         }
     },
     "definitions": {
+        "MeldingOpenbareRuimte": {
+            "required": [
+                "hoofdcategorie",
+                "subcategorie"
+            ],
+            "type": "object",
+            "properties": {
+                "url": {
+                    "title": "Url",
+                    "type": "string",
+                    "format": "uri",
+                    "readOnly": true
+                },
+                "hoofdcategorie": {
+                    "title": "Hoofdcategorie",
+                    "type": "string",
+                    "maxLength": 255,
+                    "minLength": 1
+                },
+                "subcategorie": {
+                    "title": "Subcategorie",
+                    "type": "string",
+                    "maxLength": 255,
+                    "minLength": 1
+                },
+                "locatieBeschrijving": {
+                    "title": "Locatie beschrijving",
+                    "description": "Aanvullende omschrijving locatie",
+                    "type": "string"
+                },
+                "data": {
+                    "title": "Data",
+                    "type": "string"
+                }
+            }
+        },
         "Adres": {
             "title": "Hoofdadres",
             "required": [
