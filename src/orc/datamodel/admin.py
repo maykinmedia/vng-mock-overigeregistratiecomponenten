@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Adres, VerblijfsObject
+from .models import Adres, VerblijfsObject, NietNatuurlijkPersoon
 
 
 @admin.register(Adres)
@@ -12,3 +12,8 @@ class AdresAdmin(admin.ModelAdmin):
 class VerblijfsObjectAdmin(admin.ModelAdmin):
     list_display = ['identificatie', 'hoofdadres']
     list_select_related = ('hoofdadres',)
+
+
+@admin.register(NietNatuurlijkPersoon)
+class NietNatuurlijkPersoonAdmin(admin.ModelAdmin):
+    list_display = ['__str__']

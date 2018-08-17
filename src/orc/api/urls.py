@@ -7,13 +7,14 @@ from orc.brp.api.viewsets import NatuurlijkPersoonViewSet
 from orc.mor.api.viewsets import MeldingOpenbareRuimteViewSet
 
 from .schema import schema_view
-from .viewsets import VerblijfsObjectViewSet
+from .viewsets import VerblijfsObjectViewSet, NietNatuurlijkPersoonViewSet
 
 router = DefaultRouter()
 
 router.register('brp/natuurlijkepersonen', NatuurlijkPersoonViewSet)
 
 router.register('rsgb/verblijfsobjecten', VerblijfsObjectViewSet)
+router.register('rsgb/nietnatuurlijkepersonen', NietNatuurlijkPersoonViewSet)
 
 router.register('mor', MeldingOpenbareRuimteViewSet)
 
