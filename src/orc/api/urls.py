@@ -2,8 +2,9 @@ from django.conf.urls import include, url
 
 from zds_schema.routers import DefaultRouter
 
+from orc.avg.api.viewsets import InzageVerzoekViewSet
 from orc.brp.api.viewsets import NatuurlijkPersoonViewSet
-from orc.mor.api.viewsets import MeldingOpenbareRuimteViewset
+from orc.mor.api.viewsets import MeldingOpenbareRuimteViewSet
 
 from .schema import schema_view
 from .viewsets import VerblijfsObjectViewSet
@@ -14,7 +15,9 @@ router.register('brp/natuurlijkepersonen', NatuurlijkPersoonViewSet)
 
 router.register('rsgb/verblijfsobjecten', VerblijfsObjectViewSet)
 
-router.register('mor', MeldingOpenbareRuimteViewset)
+router.register('mor', MeldingOpenbareRuimteViewSet)
+
+router.register('avg/inzageverzoeken', InzageVerzoekViewSet)
 
 
 # TODO: the EndpointEnumerator seems to choke on path and re_path
