@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Adres, VerblijfsObject, NietNatuurlijkPersoon
+from .models import Adres, NietNatuurlijkPersoon, VerblijfsObject
 
 
 @admin.register(Adres)

@@ -7,7 +7,7 @@ from orc.brp.api.viewsets import NatuurlijkPersoonViewSet
 from orc.mor.api.viewsets import MeldingOpenbareRuimteViewSet
 
 from .schema import schema_view
-from .viewsets import VerblijfsObjectViewSet, NietNatuurlijkPersoonViewSet
+from .viewsets import NietNatuurlijkPersoonViewSet, VerblijfsObjectViewSet
 
 router = DefaultRouter()
 

@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from orc.datamodel.models import Adres, VerblijfsObject, NietNatuurlijkPersoon
+from orc.datamodel.models import Adres, NietNatuurlijkPersoon, VerblijfsObject
 
 
 class AdresSerializer(serializers.ModelSerializer):

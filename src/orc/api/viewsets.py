@@ -1,9 +1,10 @@
 from rest_framework import viewsets
 
-from orc.datamodel.models import VerblijfsObject, NietNatuurlijkPersoon
+from orc.datamodel.models import NietNatuurlijkPersoon, VerblijfsObject
 
-from .serializers import VerblijfsObjectSerializer, \
-    NietNatuurlijkPersoonSerializer
+from .serializers import (
+    NietNatuurlijkPersoonSerializer, VerblijfsObjectSerializer
+)
 
 
 class VerblijfsObjectViewSet(viewsets.ModelViewSet):
