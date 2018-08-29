@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from orc.datamodel.models import Adres, VerblijfsObject
+from orc.datamodel.models import Adres, NietNatuurlijkPersoon, VerblijfsObject
 
 
 class AdresSerializer(serializers.ModelSerializer):
@@ -32,3 +32,21 @@ class VerblijfsObjectSerializer(serializers.HyperlinkedModelSerializer):
         adres, _ = Adres.objects.get_or_create(validated_data['hoofdadres'])
         validated_data['hoofdadres'] = adres
         return VerblijfsObject.objects.create(**validated_data)
+
+
+class NietNatuurlijkPersoonSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = NietNatuurlijkPersoon
+        fields = (
+            'url',
+
+            'rsin',
+            'statutaire_naam',
+            'datum_aanvang',
+            'datum_beeindiging',
+        )
+        extra_kwargs = {
+            'url': {
+                'lookup_field': 'uuid',
+            }
+        }

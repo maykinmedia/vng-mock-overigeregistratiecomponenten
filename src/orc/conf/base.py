@@ -61,6 +61,11 @@ INSTALLED_APPS = [
     'orc.accounts',
     'orc.datamodel',
     'orc.utils',
+
+    # 'temp' apps
+    'orc.brp',
+    'orc.mor',
+    'orc.avg',
 ]
 
 MIDDLEWARE = [
