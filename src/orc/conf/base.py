@@ -65,6 +65,7 @@ INSTALLED_APPS = [
     # 'temp' apps
     'orc.brp',
     'orc.mor',
+    'orc.avg',
 ]
 
 MIDDLEWARE = [

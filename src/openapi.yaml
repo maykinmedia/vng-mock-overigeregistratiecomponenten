@@ -10,6 +10,42 @@ info:
 security:
   - basic: []
 paths:
+  /avg/inzageverzoeken:
+    get:
+      operationId: inzageverzoek_list
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InzageVerzoek'
+      tags:
+        - avg
+    parameters: []
+  '/avg/inzageverzoeken/{uuid}':
+    get:
+      operationId: inzageverzoek_read
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InzageVerzoek'
+      tags:
+        - avg
+    parameters:
+      - name: uuid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
   /brp/natuurlijkepersonen:
     get:
       operationId: natuurlijkpersoon_list
@@ -132,6 +168,92 @@ paths:
         schema:
           type: string
           format: uuid
+  /rsgb/nietnatuurlijkepersonen:
+    get:
+      operationId: nietnatuurlijkpersoon_list
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NietNatuurlijkPersoon'
+      tags:
+        - rsgb
+    post:
+      operationId: nietnatuurlijkpersoon_create
+      description: ''
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NietNatuurlijkPersoon'
+      tags:
+        - rsgb
+      requestBody:
+        $ref: '#/components/requestBodies/NietNatuurlijkPersoon'
+    parameters: []
+  '/rsgb/nietnatuurlijkepersonen/{id}':
+    get:
+      operationId: nietnatuurlijkpersoon_read
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NietNatuurlijkPersoon'
+      tags:
+        - rsgb
+    put:
+      operationId: nietnatuurlijkpersoon_update
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NietNatuurlijkPersoon'
+      tags:
+        - rsgb
+      requestBody:
+        $ref: '#/components/requestBodies/NietNatuurlijkPersoon'
+    patch:
+      operationId: nietnatuurlijkpersoon_partial_update
+      description: ''
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NietNatuurlijkPersoon'
+      tags:
+        - rsgb
+      requestBody:
+        $ref: '#/components/requestBodies/NietNatuurlijkPersoon'
+    delete:
+      operationId: nietnatuurlijkpersoon_delete
+      description: ''
+      responses:
+        '204':
+          description: ''
+      tags:
+        - rsgb
+    parameters:
+      - name: id
+        in: path
+        description: A unique integer value identifying this niet-natuurlijk persoon.
+        required: true
+        schema:
+          type: integer
   /rsgb/verblijfsobjecten:
     get:
       operationId: verblijfsobject_list
@@ -222,6 +344,12 @@ servers:
   - url: /api/v1
 components:
   requestBodies:
+    NietNatuurlijkPersoon:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/NietNatuurlijkPersoon'
+      required: true
     VerblijfsObject:
       content:
         application/json:
@@ -239,6 +367,55 @@ components:
       type: http
       scheme: basic
   schemas:
+    InzageVerzoek:
+      type: object
+      properties:
+        uuid:
+          title: Uuid
+          type: string
+          format: uuid
+        inzageWmo:
+          title: Inzage wmo
+          description: Indicatie Inzage WMO
+          type: boolean
+        inzageJeugd:
+          title: Inzage jeugd
+          description: Indicatie Inzage Jeugd
+          type: boolean
+        inzageParticipatie:
+          title: Inzage participatie
+          description: Indicatie Inzage Participatie
+          type: boolean
+        inzageVeiligheidskamer:
+          title: Inzage veiligheidskamer
+          description: Indicatie Inzage Veiligheidskamer
+          type: boolean
+        inzageSchuldhulpverlening:
+          title: Inzage schuldhulpverlening
+          description: Indicatie Inzage Schuldhulpverlening
+          type: boolean
+        inzageOverigeRegelingen:
+          title: Inzage overige regelingen
+          description: Indicatie Inzage Overige regelingen
+          type: boolean
+        onderwerpOverigeRegelingen:
+          title: Onderwerp overige regelingen
+          description: Onderwerp bij Overige Regelingen
+          type: string
+          maxLength: 200
+        inzageAlgemeen:
+          title: Inzage algemeen
+          description: Indicatie Inzage Algemeen
+          type: boolean
+        redenInzageAlgemeen:
+          title: Reden inzage algemeen
+          description: Reden Algemeen
+          type: string
+          maxLength: 200
+        antwoordPerEmail:
+          title: Antwoord per email
+          description: Indicatie Antwoord per e-mail
+          type: boolean
     NatuurlijkPersoon:
       required:
         - bsn
@@ -299,6 +476,44 @@ components:
         data:
           title: Data
           type: string
+    NietNatuurlijkPersoon:
+      required:
+        - rsin
+        - datumAanvang
+      type: object
+      properties:
+        url:
+          title: Url
+          type: string
+          format: uri
+          readOnly: true
+        rsin:
+          title: Rsin
+          description: >-
+            Het door een kamer toegekend uniek nummer voor de INGESCHREVEN
+            NIET-NATUURLIJK PERSOON
+          type: string
+          maxLength: 17
+          minLength: 1
+        statutaireNaam:
+          title: Statutaire naam
+          description: >-
+            Naam van de niet-natuurlijke persoon zoals deze is vastgelegd in de
+            statuten (rechtspersoon) of in de vennootschapsovereenkomst is
+            overeengekomen (Vennootschap onder firma of Commanditaire
+            vennootschap).
+          type: string
+          maxLength: 500
+        datumAanvang:
+          title: Datum aanvang
+          description: De datum van aanvang van de NIET-NATUURLIJK PERSOON
+          type: string
+          format: date
+        datumBeeindiging:
+          title: Datum beeindiging
+          description: De datum van beëindiging van de NIET-NATUURLIJK PERSOON.
+          type: string
+          format: date
     Adres:
       title: Hoofdadres
       required:
