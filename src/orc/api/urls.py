@@ -1,12 +1,12 @@
 from django.conf.urls import include, url
 
 from zds_schema.routers import DefaultRouter
+from zds_schema.schema import SchemaView
 
 from orc.avg.api.viewsets import InzageVerzoekViewSet
 from orc.brp.api.viewsets import NatuurlijkPersoonViewSet
 from orc.mor.api.viewsets import MeldingOpenbareRuimteViewSet
 
-from .schema import schema_view
 from .viewsets import NietNatuurlijkPersoonViewSet, VerblijfsObjectViewSet
 
 router = DefaultRouter()
@@ -28,10 +28,10 @@ urlpatterns = [
 
         # API documentation
         url(r'^schema/openapi(?P<format>\.json|\.yaml)$',
-            schema_view.without_ui(cache_timeout=None),
+            SchemaView.without_ui(cache_timeout=None),
             name='schema-json'),
         url(r'^schema/$',
-            schema_view.with_ui('redoc', cache_timeout=None),
+            SchemaView.with_ui('redoc', cache_timeout=None),
             name='schema-redoc'),
 
         # actual API
