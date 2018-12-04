@@ -1,4 +1,5 @@
 from django.conf.urls import include, url
+from django.urls import path
 
 from zds_schema.routers import DefaultRouter
 from zds_schema.schema import SchemaView
@@ -36,5 +37,8 @@ urlpatterns = [
 
         # actual API
         url(r'^', include(router.urls)),
+
+        # should not be picked up by drf-yasg
+        path('', include('zds_schema.api.urls')),
     ])),
 ]

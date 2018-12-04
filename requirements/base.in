@@ -15,4 +15,4 @@ django-filter
 djangorestframework-camel-case
 djangorestframework-filters
 
-zds-schema==0.13.0
+zds-schema==0.17.2
