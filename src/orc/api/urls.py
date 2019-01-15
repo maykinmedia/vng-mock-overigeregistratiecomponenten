@@ -7,6 +7,7 @@ from zds_schema.schema import SchemaView
 from orc.avg.api.viewsets import InzageVerzoekViewSet
 from orc.brp.api.viewsets import NatuurlijkPersoonViewSet
 from orc.mor.api.viewsets import MeldingOpenbareRuimteViewSet
+from orc.products_services.api.viewsets import ProductOfDienstViewSet
 
 from .viewsets import NietNatuurlijkPersoonViewSet, VerblijfsObjectViewSet
 
@@ -20,6 +21,8 @@ router.register('rsgb/nietnatuurlijkepersonen', NietNatuurlijkPersoonViewSet)
 router.register('mor', MeldingOpenbareRuimteViewSet)
 
 router.register('avg/inzageverzoeken', InzageVerzoekViewSet)
+
+router.register('producten-en-diensten', ProductOfDienstViewSet)
 
 
 # TODO: the EndpointEnumerator seems to choke on path and re_path
