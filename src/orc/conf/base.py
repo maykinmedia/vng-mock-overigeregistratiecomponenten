@@ -66,6 +66,7 @@ INSTALLED_APPS = [
     'orc.brp',
     'orc.mor',
     'orc.avg',
+    'orc.products_services',
 ]
 
 MIDDLEWARE = [
