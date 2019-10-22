@@ -38,7 +38,7 @@ pyjwt==1.6.4              # via gemma-zds-client, zds-schema
 python-dateutil==2.7.3
 python-dotenv==0.8.2
 pytz==2018.4
-pyyaml==3.12              # via gemma-zds-client, oyaml, zds-schema
+pyyaml==5.1               # via gemma-zds-client, oyaml, zds-schema
 raven==6.9.0
 requests==2.19.1          # via coreapi, gemma-zds-client, zds-schema
 ruamel.yaml==0.15.40      # via drf-yasg
