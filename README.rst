@@ -7,11 +7,10 @@ Mock Overigedataregistratiecomponent API
 :Keywords: zaken, zaakgericht werken, GEMMA, RGBZ
 :PythonVersion: 3.6
 
-|build-status| |requirements|
+**DEPRECATED**: Dit component wordt niet meer gebruikt en heeft geen positie
+in het gegevenslandschap.
 
-``<oneliner describing the project>``
-
-Developed by `Maykin Media B.V.`_ for ``<client>``
+Ontwikkeld door `Maykin Media B.V.`_ in opdracht van VNG Realisatie B.V.
 
 
 Introduction
@@ -35,22 +34,5 @@ Documentation
 
 See ``INSTALL.rst`` for installation instructions, available settings and
 commands.
-
-
-References
-==========
-
-* `Issues <https://github.com/maykinmedia/gemma-mock-overigeregistratiecomponenten/issues>`_
-* `Code <https://github.com/maykinmedia/gemma-mock-overigeregistratiecomponenten/>`_
-
-
-.. |build-status| image:: http://jenkins.maykin.nl/buildStatus/icon?job=orc
-    :alt: Build status
-    :target: http://jenkins.maykin.nl/job/orc
-
-.. |requirements| image:: https://requires.io/bitbucket/maykinmedia/orc/requirements.svg?branch=master
-     :target: https://requires.io/bitbucket/maykinmedia/orc/requirements/?branch=master
-     :alt: Requirements status
-
 
 .. _Maykin Media B.V.: https://www.maykinmedia.nl
